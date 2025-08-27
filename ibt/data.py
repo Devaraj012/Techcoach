@@ -3,6 +3,7 @@ import requests
 import mariadb,pandas as pd
 from dotenv import load_dotenv
 load_dotenv(dotenv_path=r"C:\Users\devar\Documents\Code\Techcoach\.env")
+load_dotenv(dotenv_path=r"C:\Users\devar\Documents\Code\GIFT\.env")
 
 DB_CONFIG = {
     "host": os.getenv("DB_HOST"),
@@ -12,7 +13,7 @@ DB_CONFIG = {
     "database": os.getenv("DB_NAME")
 }
 
-cookie_ticket = os.getenv("IBT_COOKIE_TICKET")
+cookie_ticket = os.getenv("IBT_COOKIE")
 
 conn = mariadb.connect(**DB_CONFIG)
 cursor = conn.cursor(dictionary=True)
@@ -84,7 +85,7 @@ def upload_data(file_path, query_number):
     }
     
     headers = {
-        'Cookie': 'ticket=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRldmFyYWpAaWJhY3VzdGVjaGxhYnMuaW4iLCJpZCI6NCwidHlwZSI6IkFETUlOIiwiaWF0IjoxNzQyNTM4Mzg0LCJleHAiOjE3NDI1ODE1ODR9.M2FXM5VskT1T7VHDouULwiVfOTnlsj5cpcyu0odrvKc'
+        'Cookie': f'ticket={cookie_ticket}',
     }
     
     payload = payloads.get(query_number, {})
